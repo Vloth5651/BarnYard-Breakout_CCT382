@@ -75,7 +75,7 @@ namespace TowerDefense.Towers.Placement
 		/// </summary>
 		/// <param name="gridPos">The grid location</param>
 		/// <param name="size">The size of the item</param>
-		public TowerFitStatus Fits(IntVector2 gridPos, IntVector2 size)
+		public TowerFitStatus Fits(IntVector2 gridPos, IntVector2 size, Tower? controller = null)
 		{
 			return m_IsOccupied ? TowerFitStatus.Overlaps : TowerFitStatus.Fits;
 		}

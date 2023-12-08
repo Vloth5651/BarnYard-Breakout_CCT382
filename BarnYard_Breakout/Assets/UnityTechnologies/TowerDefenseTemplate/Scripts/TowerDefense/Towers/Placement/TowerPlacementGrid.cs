@@ -13,14 +13,29 @@ namespace TowerDefense.Towers.Placement
 	public class TowerPlacementGrid : MonoBehaviour, IPlacementArea
 	{
 		/// <summary>
+		/// List of possible towers that can be placed on this grid
+		/// </summary>
+		public Tower[] possibleTowers;
+		
+		/// <summary>
 		/// Prefab used to visualise the grid
 		/// </summary>
 		public PlacementTile placementTilePrefab;
 		
 		/// <summary>
+		/// Prefab used to visualise the grid when possible towers are set
+		/// </summary>
+		public PlacementTile placementTileLimitedPrefab;
+
+		/// <summary>
 		/// Visualisation prefab to instantiate on mobile platforms
 		/// </summary>
 		public PlacementTile placementTilePrefabMobile;
+
+		/// <summary>
+		/// Visualisation prefab to instantiate on mobile platforms when possible towers are set
+		/// </summary> 
+		public PlacementTile placementTileLimitedPrefabMobile;
 
 		/// <summary>
 		/// The dimensions of the grid 
@@ -92,8 +107,24 @@ namespace TowerDefense.Towers.Placement
 		/// <param name="gridPos">The grid location</param>
 		/// <param name="size">The size of the item</param>
 		/// <returns>Whether the indicated range is valid for placement.</returns>
-		public TowerFitStatus Fits(IntVector2 gridPos, IntVector2 size)
+		public TowerFitStatus Fits(IntVector2 gridPos, IntVector2 size, Tower? controller = null)
 		{
+			// if there possible towers are set
+			if (possibleTowers != null && possibleTowers.Length > 0 && controller != null)
+			{
+				//if controller in possible towers debug log towerName
+				// to see if controller is in possible towers list use .towerName and see if it is in the list
+				if (Array.Exists(possibleTowers, tower => tower.towerName == controller.towerName))
+				{
+					//Debug.Log("Tower is in possible towers list");
+				}
+				else
+				{
+					//Debug.Log("Tower is not in possible towers list");
+					return TowerFitStatus.OutOfBounds;
+				}
+				
+			}
 			// If the tile size of the tower exceeds the dimensions of the placement area, immediately decline placement.
 			if ((size.x > dimensions.x) || (size.y > dimensions.y))
 			{
@@ -237,9 +268,24 @@ namespace TowerDefense.Towers.Placement
 		{		
 			PlacementTile tileToUse;
 #if UNITY_STANDALONE
-			tileToUse = placementTilePrefab;
+			// if possible towers are set use placementTileLimtedPrefab
+			if (possibleTowers != null && possibleTowers.Length > 0)
+			{
+				tileToUse = placementTileLimitedPrefab;
+			}
+			else
+			{
+				tileToUse = placementTilePrefab;
+			}
 #else
-			tileToUse = placementTilePrefabMobile;
+			if (possibleTowers != null && possibleTowers.Length > 0)
+			{
+				tileToUse = placementTileLimitedPrefabMobile;
+			}
+			else
+			{
+				tileToUse = placementTilePrefabMobile;
+			}
 #endif
 			
 			if (tileToUse != null)
@@ -304,7 +350,16 @@ namespace TowerDefense.Towers.Placement
 		void OnDrawGizmos()
 		{
 			Color prevCol = Gizmos.color;
-			Gizmos.color = Color.cyan;
+			// color is cyan if no possible towers are set
+			// color is yellow if possible towers are set
+			if (possibleTowers != null && possibleTowers.Length > 0)
+			{
+				Gizmos.color = Color.yellow;
+			}
+			else
+			{
+				Gizmos.color = Color.cyan;
+			}
 
 			Matrix4x4 originalMatrix = Gizmos.matrix;
 			Gizmos.matrix = transform.localToWorldMatrix;

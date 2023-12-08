@@ -599,7 +599,7 @@ namespace TowerDefense.UI.HUD
 			{
 				return false;
 			}
-			TowerFitStatus fits = m_CurrentArea.Fits(m_GridPosition, m_CurrentTower.controller.dimensions);
+			TowerFitStatus fits = m_CurrentArea.Fits(m_GridPosition, m_CurrentTower.controller.dimensions, m_CurrentTower.controller);
 			return fits == TowerFitStatus.Fits;
 		}
 
@@ -885,7 +885,7 @@ namespace TowerDefense.UI.HUD
 				return;
 			}
 			m_GridPosition = m_CurrentArea.WorldToGrid(raycast.point, m_CurrentTower.controller.dimensions);
-			TowerFitStatus fits = m_CurrentArea.Fits(m_GridPosition, m_CurrentTower.controller.dimensions);
+			TowerFitStatus fits = m_CurrentArea.Fits(m_GridPosition, m_CurrentTower.controller.dimensions, m_CurrentTower.controller);
 
 			m_CurrentTower.Show();
 			m_GhostPlacementPossible = fits == TowerFitStatus.Fits && IsValidPurchase();
@@ -937,7 +937,7 @@ namespace TowerDefense.UI.HUD
 
 			if (m_CurrentArea != null)
 			{
-				TowerFitStatus fits = m_CurrentArea.Fits(m_GridPosition, m_CurrentTower.controller.dimensions);
+				TowerFitStatus fits = m_CurrentArea.Fits(m_GridPosition, m_CurrentTower.controller.dimensions, m_CurrentTower.controller);
 
 				if (fits == TowerFitStatus.Fits)
 				{
@@ -983,7 +983,7 @@ namespace TowerDefense.UI.HUD
 			{
 				return;
 			}
-			TowerFitStatus fits = m_CurrentArea.Fits(m_GridPosition, m_CurrentTower.controller.dimensions);
+			TowerFitStatus fits = m_CurrentArea.Fits(m_GridPosition, m_CurrentTower.controller.dimensions, m_CurrentTower.controller);
 			bool valid = fits == TowerFitStatus.Fits && IsValidPurchase();
 			m_CurrentTower.Move(m_CurrentArea.GridToWorld(m_GridPosition, m_CurrentTower.controller.dimensions),
 			                    m_CurrentArea.transform.rotation,

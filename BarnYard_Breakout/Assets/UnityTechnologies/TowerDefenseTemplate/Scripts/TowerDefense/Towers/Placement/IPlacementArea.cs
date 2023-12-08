@@ -28,8 +28,9 @@ namespace TowerDefense.Towers.Placement
 		/// </summary>
 		/// <param name="gridPos">The grid location</param>
 		/// <param name="size">The size of the item</param>
+		/// <param name="controller">The tower that is trying to fit</param>
 		/// <returns>True if the item would fit at <paramref name="gridPos"/></returns>
-		TowerFitStatus Fits(IntVector2 gridPos, IntVector2 size);
+		TowerFitStatus Fits(IntVector2 gridPos, IntVector2 size, Tower? controller = null);
 
 		/// <summary>
 		/// Occupy the given space on this placement area
