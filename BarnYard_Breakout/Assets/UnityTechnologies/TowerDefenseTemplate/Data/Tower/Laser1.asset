@@ -16,6 +16,6 @@ MonoBehaviour:
   upgradeDescription: 
   cost: 15
   sell: 7
-  maxHealth: 5
-  startingHealth: 5
+  maxHealth: 50
+  startingHealth: 50
   icon: {fileID: 21300000, guid: 64533362e08b8ea42a655fe27b12e6cd, type: 3}

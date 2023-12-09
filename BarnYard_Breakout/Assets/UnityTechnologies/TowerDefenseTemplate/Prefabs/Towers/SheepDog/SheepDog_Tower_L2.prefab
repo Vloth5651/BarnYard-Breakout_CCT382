@@ -19554,7 +19554,7 @@ MonoBehaviour:
   - {fileID: 229885112240080611}
   epicenter: {fileID: 6667842402973553400}
   isMultiAttack: 0
-  fireRate: 0.35
+  fireRate: 1
   randomAudioSource: {fileID: 3881359713027503592}
   towerTargetter: {fileID: 6243940462797920522}
   radiusEffectColor: {r: 0, g: 1, b: 1, a: 0.09803922}
