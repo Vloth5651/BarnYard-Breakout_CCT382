@@ -19708,7 +19708,7 @@ GameObject:
   - component: {fileID: 114711563749760058}
   - component: {fileID: 114479021208482228}
   m_Layer: 11
-  m_Name: Chicken
+  m_Name: 1 Chicken
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
