@@ -21,7 +21,7 @@ MonoBehaviour:
     name: Level 2
     description: Create mazes to slow enemies
     sceneName: Level2
-  - id: 3
-    name: Level 4
+  - id: 2
+    name: Level 3
     description: Protect the long mountain pass
-    sceneName: Level4
+    sceneName: Level3
